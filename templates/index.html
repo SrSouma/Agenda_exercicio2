@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <h1>Agenda de Contatos</h1>
+    <form action="/create" method="POST">
+      <input name="nome" placeholder="Nome:">
+      <input name="email" placeholder="E-mail:">
+      <input name="phone" placeholder="Telefone:">
+      <button type="submit">Adicionar</button>
+    </form>
+    <ul> 
+        {% for contact in contacts %}
+          <li>
+            <form action="/update/{{contact[0]}}" method="POST">
+              <input name="name" value="{{ contact[1] }}">
+              <input name="email" value="{{ contact[2] }}">
+              <input name="phone" value="{{ contact[3] }}">
+              <button type="submit"">&#9998;</button>
+              {% if contact[5] == 0 %}
+                <a href="/complete/{{ contact[0] }}">✅</a>
+              {% endif %}
+              <a href="/delete/{{ contact[0] }}">❌</a>
+            </form>            
+          </li>
+          
+        {% endfor %}
+    </ul>
+</body>
+</html>
